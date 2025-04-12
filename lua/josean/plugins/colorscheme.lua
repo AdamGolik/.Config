@@ -1,5 +1,9 @@
 local themes = {
   "dracula",
+  "rose-pine",
+  "catppuccin",
+  "tokyonight",
+  "everforest",
 }
 
 local current = 1
@@ -12,33 +16,66 @@ end, {})
 vim.keymap.set("n", "<leader>th", "<cmd>ToggleTheme<CR>", { desc = "Toggle Theme" })
 
 return {
+  -- Dracula (różowo-fioletowy)
   {
     "Mofiqul/dracula.nvim",
     lazy = false,
     priority = 1000,
     config = function()
       require("dracula").setup({
-        transparent_bg = true, -- Mofiqul's plugin uses this flag
+        transparent_bg = true,
         overrides = function(colors)
           return {
             Normal = { bg = "NONE" },
-            NormalNC = { bg = "NONE" },
             NormalFloat = { bg = "NONE" },
             FloatBorder = { bg = "NONE" },
-            VertSplit = { bg = "NONE" },
-            SignColumn = { bg = "NONE" },
             StatusLine = { bg = "NONE" },
-            LineNr = { bg = "NONE" },
-            CursorLineNr = { bg = "NONE" },
-            Pmenu = { bg = "NONE" },
-            PmenuSel = { bg = "NONE" },
-            TelescopeNormal = { bg = "NONE" },
-            TelescopeBorder = { bg = "NONE" },
           }
         end,
       })
+    end,
+  },
 
-      vim.cmd("colorscheme dracula")
+  -- Rose Pine (pastelowy róż)
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+      require("rose-pine").setup({
+        disable_background = true,
+      })
+    end,
+  },
+
+  -- Catppuccin (styl pastelowy z profilami)
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- mocha = dark
+        transparent_background = true,
+      })
+    end,
+  },
+
+  -- TokyoNight (ładny niebieski)
+  {
+    "folke/tokyonight.nvim",
+    config = function()
+      require("tokyonight").setup({
+        style = "storm",
+        transparent = true,
+      })
+    end,
+  },
+
+  -- Everforest (zielony, miękki)
+  {
+    "sainnhe/everforest",
+    config = function()
+      vim.g.everforest_background = "soft"
+      vim.g.everforest_transparent_background = 2
     end,
   },
 }
