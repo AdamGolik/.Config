@@ -23,7 +23,7 @@ return {
 
     mason_lspconfig.setup({
       ensure_installed = {
-        "tsserver",
+        -- usuń tsserver stąd, jeśli chcesz go mieć to tylko jako tool przez mason-tool-installer
         "html",
         "cssls",
         "tailwindcss",
@@ -34,7 +34,7 @@ return {
         "prismals",
         "pyright",
         "gopls",
-        "rust_analyzer", -- ✅ Added Rust LSP
+        "rust_analyzer",
       },
     })
 
@@ -51,11 +51,11 @@ return {
         "golines",
         "golangci-lint",
         "clang-format",
-        "rustfmt", -- ✅ Rust formatter
-        "codelldb", -- (optional) Debugger for Rust
+        "rustfmt",
+        "codelldb",
+        "typescript-language-server", -- dodane tu zamiast w LSPConfig
       },
     })
-
     null_ls.setup({
       debug = true,
       sources = {
