@@ -8,13 +8,14 @@ return {
       -- All of these are just the defaults
       --
       enabled = true, -- start auto-save when the plugin is loaded (i.e. when your package manager loads it)
+
       execution_message = {
         enabled = true,
-        message = function() -- message to print on save
+        message = function()
           return ("AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"))
         end,
-        dim = 0.18, -- dim the color of `message`
-        cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
+        dim = 0.18,
+        cleaning_interval = 1250,
       },
       trigger_events = { -- See :h events
         immediate_save = { "BufLeave", "FocusLost" }, -- vim events that trigger an immediate save
