@@ -21,7 +21,9 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
--- theme
+-- terminal
+
+keymap.set("n", "<leader>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 -- golang
 
 keymap.set("n", "<leader>gm", function()
@@ -45,13 +47,13 @@ keymap.set("n", "<leader>gr", function()
   local go_run = Terminal:new({
     cmd = "go run main.go",
     hidden = true,
-    direction = "float", -- albo "horizontal", "vertical", "tab"
+    direction = "tab", -- albo "horizontal", "vertical", "tab"
     close_on_exit = false,
   })
   go_run:toggle()
 end, { desc = "Run Go in ToggleTerm" })
 -- terminal window
-keymap.set("n", "<leader>tt", function()
+keymap.set("n", "<leader>tttd", function()
   local Terminal = require("toggleterm.terminal").Terminal
   local run = Terminal:new({
     cmd = "tmux new-session -s nvim",
@@ -84,4 +86,4 @@ keymap.set("n", "<leader>tt", function()
     end,
   })
   run:toggle()
-end, { desc = "Toggle terminal" })
+end, { desc = "Toggle terminal" }) -- terminal window

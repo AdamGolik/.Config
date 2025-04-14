@@ -1,17 +1,31 @@
 return {
-  {
-    "nvimdev/dashboard-nvim",
-    enabled = false,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    enabled = false,
-  },
-  -- messages, cmdline and the popupmenu
+  -- Wyłączenie lualine i web-devicons
+  { "MunifTanjim/nui.nvim" },
+  { "nvim-lualine/lualine.nvim", enabled = false },
+  { "nvim-lua/plenary.nvim" },
 
+  -- Konfiguracja nvim-tree
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = {
+      view = {
+        adaptive_size = true,
+        width = 30,
+      },
+      renderer = {
+        highlight_git = true,
+        highlight_opened_files = "all",
+        root_folder_modifier = ":t",
+      },
+      filters = {
+        dotfiles = false,
+      },
+    },
+  },
+
+  -- Konfiguracja noice
   {
     "folke/noice.nvim",
-
     opts = function(_, opts)
       opts.routes = opts.routes or {}
 
@@ -22,6 +36,7 @@ return {
         },
         opts = { skip = true },
       })
+
       local focused = true
       vim.api.nvim_create_autocmd("FocusGained", {
         callback = function()
@@ -33,6 +48,7 @@ return {
           focused = false
         end,
       })
+
       table.insert(opts.routes, 1, {
         filter = {
           cond = function()
@@ -42,6 +58,7 @@ return {
         view = "notify_send",
         opts = { stop = false },
       })
+
       opts.commands = {
         all = {
           view = "split",
@@ -54,6 +71,8 @@ return {
       opts.presets.lsp_doc_border = true
     end,
   },
+
+  -- Konfiguracja nvim-notify
   {
     "rcarriga/nvim-notify",
     opts = {
@@ -63,7 +82,7 @@ return {
     },
   },
 
-  -- buffer line
+  -- Konfiguracja bufferline
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",

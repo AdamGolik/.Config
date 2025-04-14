@@ -37,4 +37,33 @@ return {
     },
     opts = {},
   },
+
+  -- Golang configuration
+  {
+    "fatih/vim-go", -- Go support
+    ft = "go", -- Only load for Go files
+    config = function()
+      -- Add your Go-specific configurations here
+      vim.g.go_fmt_command = "goimports" -- Example: use goimports for formatting
+    end,
+  },
+
+  -- JavaScript/TypeScript (tsx) configuration
+  {
+    "pangloss/vim-javascript", -- JavaScript support
+    ft = { "javascript", "typescript", "typescriptreact" }, -- JavaScript/TS/TSX support
+    config = function()
+      -- Add your JS/TS/TSX-specific configurations here
+      vim.g.javascript_plugin_jsdoc = 1 -- Example: Enable JSDoc for JavaScript
+    end,
+  },
+
+  {
+    "leafgarland/typescript-vim", -- TypeScript support
+    ft = { "typescript", "typescriptreact" },
+    config = function()
+      -- Add your TypeScript-specific configurations here
+      vim.g.typescript_plugin = 1 -- Example: Enable TypeScript plugin
+    end,
+  },
 }
