@@ -1,4 +1,5 @@
 return {
+  -- Rust tools plugin
   "simrat39/rust-tools.nvim",
   ft = { "rust" },
   config = function()
