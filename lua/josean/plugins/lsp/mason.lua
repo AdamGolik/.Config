@@ -6,11 +6,13 @@ return {
     "nvimtools/none-ls.nvim",
   },
   config = function()
+    -- Initialize Mason
     local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
     local mason_tool_installer = require("mason-tool-installer")
     local null_ls = require("null-ls")
 
+    -- Setup Mason UI
     mason.setup({
       ui = {
         icons = {
@@ -21,49 +23,89 @@ return {
       },
     })
 
+    -- Setup Mason LSP configuration
     mason_lspconfig.setup({
       ensure_installed = {
-        -- usuń tsserver stąd, jeśli chcesz go mieć to tylko jako tool przez mason-tool-installer
+        -- Web Development
         "html",
         "cssls",
         "tailwindcss",
-        "svelte",
-        "lua_ls",
-        "graphql",
         "emmet_ls",
         "prismals",
-        "pyright",
-        "gopls",
+        "graphql",
+        
+        -- JavaScript/TypeScript
+        "tsserver",
+        "eslint",
+        "svelte",
+        
+        -- Backend
         "rust_analyzer",
+        "gopls",
+        "pyright",
+        
+        -- Other
+        "lua_ls",
+        "jsonls",
+        "yamlls",
       },
+      automatic_installation = true,
     })
 
+    -- Setup Mason Tool Installer
     mason_tool_installer.setup({
       ensure_installed = {
+        -- Formatters
         "prettier",
         "stylua",
-        "isort",
-        "black",
-        "pylint",
-        "eslint_d",
+        "rustfmt",
         "gofumpt",
         "goimports",
         "golines",
-        "golangci-lint",
+        "black",
+        "isort",
         "clang-format",
-        "rustfmt",
+        
+        -- Linters
+        "eslint_d",
+        "golangci-lint",
+        "pylint",
+        
+        -- Debuggers
         "codelldb",
-        "typescript-language-server", -- dodane tu zamiast w LSPConfig
+        
+        -- Language Servers
+        "typescript-language-server",
       },
+      auto_update = true,
+      run_on_start = true,
     })
+
+    -- Setup Null-LS
     null_ls.setup({
-      debug = true,
       sources = {
+        -- Go
         null_ls.builtins.formatting.gofumpt,
         null_ls.builtins.formatting.goimports,
         null_ls.builtins.diagnostics.golangci_lint,
+        
+        -- Rust
+        null_ls.builtins.formatting.rustfmt,
+        
+        -- Python
+        null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.isort,
+        null_ls.builtins.diagnostics.pylint,
+        
+        -- JavaScript/TypeScript
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.eslint_d,
+        
+        -- Lua
+        null_ls.builtins.formatting.stylua,
+        
+        -- C/C++
         null_ls.builtins.formatting.clang_format,
-        null_ls.builtins.formatting.rustfmt, -- ✅ Rust formatter for null-ls
       },
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
@@ -81,4 +123,3 @@ return {
     })
   end,
 }
-

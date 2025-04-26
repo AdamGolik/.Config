@@ -74,6 +74,68 @@ return {
         })
       end,
 
+      ["rust_analyzer"] = function()
+        lspconfig["rust_analyzer"].setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = {
+                command = "clippy",
+              },
+              inlayHints = {
+                enable = true,
+              },
+            },
+          },
+        })
+      end,
+
+      ["gopls"] = function()
+        lspconfig["gopls"].setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+          settings = {
+            gopls = {
+              gofumpt = true,
+              usePlaceholders = true,
+              completeUnimported = true,
+            },
+          },
+        })
+      end,
+
+      ["tsserver"] = function()
+        lspconfig["tsserver"].setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+          settings = {
+            typescript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+            javascript = {
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+          },
+        })
+      end,
+
       ["svelte"] = function()
         lspconfig["svelte"].setup({
           on_attach = on_attach,
@@ -119,6 +181,9 @@ return {
               },
               completion = {
                 callSnippet = "Replace",
+              },
+              workspace = {
+                checkThirdParty = false,
               },
             },
           },

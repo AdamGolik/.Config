@@ -6,7 +6,6 @@ return {
     vim.o.timeoutlen = 500
   end,
   opts = {
-    -- tutaj dodajesz swoje własne mapy pod <leader>
     defaults = {
       ["<leader>z"] = {
         name = "Folding",
@@ -27,6 +26,11 @@ return {
         ca = "code action",
         rn = "rename",
       },
+    },
+    window = {
+      border = "single", -- Ustawienie obramowania okna
+      position = "top", -- Okno na górze
+      winblend = 20, -- Przezroczystość okna (0 to brak przezroczystości, 100 to pełna przezroczystość)
     },
   },
 }

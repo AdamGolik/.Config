@@ -1,24 +1,17 @@
 return {
-  -- Wyłączenie lualine i web-devicons
+  -- Wymagane wtyczki
   { "MunifTanjim/nui.nvim" },
-  { "nvim-lualine/lualine.nvim", enabled = false },
   { "nvim-lua/plenary.nvim" },
 
-  -- Konfiguracja nvim-tree
+  -- Konfiguracja snacks.nvim
   {
-    "nvim-tree/nvim-tree.lua",
+    "folke/snacks.nvim",
     opts = {
-      view = {
-        adaptive_size = true,
-        width = 30,
-      },
-      renderer = {
-        highlight_git = true,
-        highlight_opened_files = "all",
-        root_folder_modifier = ":t",
-      },
-      filters = {
-        dotfiles = false,
+      -- Skrócenie czasu powiadomień
+      notify = {
+        timeout = 2000, -- 2 sekundy
+        background_colour = "#000000",
+        render = "wrapped-compact",
       },
     },
   },
@@ -69,6 +62,19 @@ return {
 
       opts.presets = opts.presets or {}
       opts.presets.lsp_doc_border = true
+
+      -- Skrócenie czasu wyświetlania informacji LSP
+      opts.views = {
+        hover = {
+          timeout = 2000, -- 2 sekundy
+        },
+        cmdline_popup = {
+          timeout = 2000, -- 2 sekundy
+        },
+        notify = {
+          timeout = 2000, -- 2 sekundy
+        },
+      }
     end,
   },
 
@@ -76,9 +82,16 @@ return {
   {
     "rcarriga/nvim-notify",
     opts = {
-      timeout = 5000,
+      timeout = 2000, -- 2 sekundy
       background_colour = "#000000",
       render = "wrapped-compact",
+      stages = "fade_in_slide_out",
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
     },
   },
 
